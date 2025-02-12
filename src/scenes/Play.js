@@ -4,20 +4,20 @@ class Play extends Phaser.Scene {
     }
     
     create() {
+      this.physics.world.gravity.y = 300
       // place tile sprite
       this.blood = this.add.tileSprite(0, 0, 1680, 900, 'blood').setOrigin(0, 0)
       this.add.text(20, 20, "Endless Runner Play")
 
-      characterRef = this.add.sprite(0, 0, 'characterSprite').setOrigin(0, 0)
+      characterRef = this.physics.add.sprite(0, 0, 'characterSprite').setOrigin(0, 0)
       characterRef.setSize(212, 193)
-      /*terry.setOffset(10, 0)
-      terry.anims.play('swim')
-      terry.body.setCollideWorldBounds(true)
-      terry.setImmovable()
-      terry.setMaxVelocity(0, 600)
-      terry.setDragY(10)
-      terry.destroyed = false
-      */
+      //characterRef.setOffset(10, 0)
+      characterRef.body.setCollideWorldBounds(true)
+      //characterRef.setImmovable()
+      characterRef.setMaxVelocity(0, 600)
+      characterRef.setDragY(8)
+      //characterRef.destroyed = false
+      
       
       this.anims.create({
         key: 'look',

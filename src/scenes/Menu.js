@@ -85,46 +85,6 @@ class Menu extends Phaser.Scene {
          this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
          this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        /*// making button function  
-        const createButton = (x, y, text, color, callback) => {
-            let button = this.add.text(x, y, text, {
-                fontFamily: 'Courier',
-                fontSize: '55px',
-                backgroundColor: '#c1fff2',
-                padding: { x: 20, y: 10 },
-            }).setOrigin(0.5).setInteractive();
-
-
-            
-            button.on("pointerover", () => {
-                this.tweens.add({
-                    targets: button,
-                    scaleX: 1.1,
-                    scaleY: 1.1,
-                    duration: 150,
-                    ease: "Power1",
-                });
-            });
-
-            button.on("pointerout", () => {
-                this.tweens.add({
-                    targets: button,
-                    scaleX: 1,
-                    scaleY: 1,
-                    duration: 150,
-                    ease: "Power1",
-                });
-            });
-
-            button.on("pointerdown", callback);
-
-            return button;
-        };
-
-        //createButton(400, 450, "Controls", "#0072ff", () => this.scene.start("title"));
-        createButton(400, 550, "Credits", "#00c6ff", () => this.scene.start("creditsScene"));
-        */
-
     }
 
     update() {
