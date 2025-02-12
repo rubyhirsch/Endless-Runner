@@ -7,23 +7,21 @@ class Menu extends Phaser.Scene {
         
         this.load.image("GameOver", "assets/game_over.png")
 
-        this.load.spritesheet('title', 'assets/sprite_sheet.png', {
+        this.load.spritesheet('menu', 'assets/sprite_sheet.png', {
             frameWidth: 1680,
             frameHeight: 900
         })
 
-        //this.load.audio("bgMusic", "assets/BackgroundMusic.mp3");
-        //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     }
     create() {
-        //create title screen
-        let titleScreen = this.add.sprite(0, 0, 'title').setOrigin(0, 0)
+        //create menu screen
+        let titleScreen = this.add.sprite(0, 0, 'menu').setOrigin(0, 0)
 
         titleScreen.anims.create({
             key: 'blink',
             frameRate: 2,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('title', {
+            frames: this.anims.generateFrameNumbers('menu', {
                 start:0,
                 end: 1
             })
@@ -31,27 +29,110 @@ class Menu extends Phaser.Scene {
         titleScreen.anims.play('blink')
 
         // menu scene config
-        let titleConfig = {
+        let menuLook = {
             fontFamily: 'Courier',
-            fontSize: '55px',
-            color: 'white',
+            fontSize: '70px',
+            backgroundColor: '#6a9172',
+            color: '#3a6443',
             align: 'center',
         }   
         
-        let descriptConfig = {
+        let oneLook = {
             fontFamily: 'Courier',
-            fontSize: '30px',
+            fontSize: '40px',
+            backgroundColor: '#162a30',
             color: 'white',
+            align: 'center',
+        }
+
+        let twoLook = {
+            fontFamily: 'Courier',
+            fontSize: '45px',
+            backgroundColor: '#bec6c0',
+            color: 'black',
             align: 'center',
         }
 
 
 
         // add title text
-        this.add.text(centerX + 350, centerY - 300, 'Contagion Crosser', titleConfig).setOrigin(0.5)
+        this.add.text(centerX + 350, centerY - 300, ' Contagion Crosser ', menuLook).setOrigin(0.5)
 
         // add descriptor
-        this.add.text(centerX + 360, centerY - 250, 'Press [SPACE] to begin!', descriptConfig).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY - 200, ' Press [SPACE] to begin! ', twoLook).setOrigin(0.5)
+
+        // add text for directions
+        //this.add.text(game.config.width/2 + 350, 250, ' Press [M] for Menu ', oneLook).setOrigin(0.5)
+        this.add.text(game.config.width/2 + 350, 350, ' Press [C] for Credits', oneLook).setOrigin(0.5)
+        this.add.text(game.config.width/2 + 350, 450, ' Press [R] to Restart ', oneLook).setOrigin(0.5)
+    
+        // define M R C keys
+         //this.keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M)
+         this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
+
+        /*// making button function  
+        const createButton = (x, y, text, color, callback) => {
+            let button = this.add.text(x, y, text, {
+                fontFamily: 'Courier',
+                fontSize: '55px',
+                backgroundColor: '#c1fff2',
+                padding: { x: 20, y: 10 },
+            }).setOrigin(0.5).setInteractive();
+
+
+            
+            button.on("pointerover", () => {
+                this.tweens.add({
+                    targets: button,
+                    scaleX: 1.1,
+                    scaleY: 1.1,
+                    duration: 150,
+                    ease: "Power1",
+                });
+            });
+
+            button.on("pointerout", () => {
+                this.tweens.add({
+                    targets: button,
+                    scaleX: 1,
+                    scaleY: 1,
+                    duration: 150,
+                    ease: "Power1",
+                });
+            });
+
+            button.on("pointerdown", callback);
+
+            return button;
+        };
+
+        //createButton(400, 450, "Controls", "#0072ff", () => this.scene.start("title"));
+        createButton(400, 550, "Credits", "#00c6ff", () => this.scene.start("creditsScene"));
+        */
+
     }
 
+    update() {
+        // check for M input for menu
+        //if (Phaser.Input.Keyboard.JustDown(this.keyM)) {
+            //this.scene.start('titleScene')
+            //this.sound.play('st')
+        //}
+
+        // check for R input for restart
+        //if (Phaser.Input.Keyboard.JustDown(this.keyR)) {
+          //  this.scene.start('playScene')
+           // this.sound.play('st')
+        //}
+
+        // check for C input for restart
+        if (Phaser.Input.Keyboard.JustDown(this.keyC)) {
+            this.scene.start('CreditScreen')
+            //this.sound.play('st')
+        }
+    }
 }
+
+    
+
