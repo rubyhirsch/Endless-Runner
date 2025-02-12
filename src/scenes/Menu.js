@@ -7,9 +7,20 @@ class Menu extends Phaser.Scene {
         
         this.load.image("GameOver", "assets/game_over.png")
 
-        this.load.spritesheet('menu', 'assets/sprite_sheet.png', {
+        this.load.spritesheet('menu', './assets/sprite_sheet.png', {
             frameWidth: 1680,
             frameHeight: 900
+        })
+
+         //loading moving tile
+        this.load.image('blood', './assets/blood_bath.png')
+        
+        //this.load.image("imageTest", "./assets/character_sprite_sheet.png")
+
+        //loading animated spritesheet for character
+        this.load.spritesheet('characterSprite', './assets/character_sprite_sheet.png', {
+            frameWidth: 212,
+            frameHeight: 193
         })
 
     }
@@ -27,6 +38,8 @@ class Menu extends Phaser.Scene {
             })
         })
         titleScreen.anims.play('blink')
+
+
 
         // menu scene config
         let menuLook = {
@@ -70,6 +83,7 @@ class Menu extends Phaser.Scene {
          //this.keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M)
          this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
          this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
+         this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         /*// making button function  
         const createButton = (x, y, text, color, callback) => {
@@ -129,10 +143,19 @@ class Menu extends Phaser.Scene {
         // check for C input for restart
         if (Phaser.Input.Keyboard.JustDown(this.keyC)) {
             this.scene.start('CreditScreen')
+            console.log("CreditCalled")
+            //this.sound.play('st')
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.keySPACE)) {
+            console.log("beforeplayscene")
+            this.scene.start('playScene')
+            console.log("placySceneCalled")
             //this.sound.play('st')
         }
     }
 }
 
+    
     
 
