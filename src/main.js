@@ -14,6 +14,10 @@ let config = {
             //debug: true
         }
     },
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+
     scene: [ Menu, Play, Credits, Tut, GameOver ]
 }
 
