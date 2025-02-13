@@ -14,6 +14,8 @@ class Menu extends Phaser.Scene {
 
          //loading moving tile
         this.load.image('blood', './assets/blood_bath.png')
+        this.load.image('virus', './assets/virus_sprite.png')
+        this.load.image('mask', './assets/mask_sprite.png')
         
         //this.load.image("imageTest", "./assets/character_sprite_sheet.png")
 
@@ -49,6 +51,14 @@ class Menu extends Phaser.Scene {
             color: '#3a6443',
             align: 'center',
         }   
+
+        let oneMenuLook = {
+            fontFamily: 'Courier',
+            fontSize: '70px',
+            backgroundColor: '#162a30',
+            color: 'white',
+            align: 'center',
+        }
         
         let oneLook = {
             fontFamily: 'Courier',
@@ -69,19 +79,21 @@ class Menu extends Phaser.Scene {
 
 
         // add title text
-        this.add.text(centerX + 350, centerY - 300, ' Contagion Crosser ', menuLook).setOrigin(0.5)
+        this.add.text(centerX + 350, centerY - 300, ' Contagion Crosser ', oneMenuLook).setOrigin(0.5)
 
         // add descriptor
         this.add.text(centerX + 360, centerY - 200, ' Press [SPACE] to begin! ', twoLook).setOrigin(0.5)
 
         // add text for directions
         //this.add.text(game.config.width/2 + 350, 250, ' Press [M] for Menu ', oneLook).setOrigin(0.5)
-        this.add.text(game.config.width/2 + 350, 350, ' Press [C] for Credits', oneLook).setOrigin(0.5)
-        this.add.text(game.config.width/2 + 350, 450, ' Press [R] to Restart ', oneLook).setOrigin(0.5)
+        this.add.text(game.config.width/2 + 350, 450, ' Press [C] for Credits', oneLook).setOrigin(0.5)
+        this.add.text(game.config.width/2 + 350, 350, ' Press [T] for Tutorial', oneLook).setOrigin(0.5)
+        //this.add.text(game.config.width/2 + 350, 450, ' Press [R] to Restart ', oneLook).setOrigin(0.5)
     
         // define M R C keys
          //this.keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M)
-         this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+         //this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+         this.keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T)
          this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
          this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
@@ -113,6 +125,16 @@ class Menu extends Phaser.Scene {
             console.log("placySceneCalled")
             //this.sound.play('st')
         }
+
+       //'TutorialScreen'
+        if (Phaser.Input.Keyboard.JustDown(this.keyT)) {
+            console.log("Tut screen")
+            this.scene.start('tutScreen')
+            console.log("this is called, god help us all")
+            //this.sound.play('st')
+        }
+        
+      
     }
 }
 
