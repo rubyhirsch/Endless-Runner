@@ -61,21 +61,35 @@ class Play extends Phaser.Scene {
         console.log("add virus")
         this.addVirus(); 
       });
+
+      // add score for masks
+      this.masksScore = 0
+
+      let oneMenuLook = {
+        fontFamily: 'Courier',
+        fontSize: '50px',
+        backgroundColor: '#162a30',
+        color: 'white',
+        align: 'center',
+    }
+
+      // score board text
+      this.score = this.add.text(centerX, 10,`Masks Collected: ${this.masksScore}`, oneMenuLook).setOrigin(0.5, 0)
     }
     
     // create new Virus and add them to existing Virus group
     addVirus() {
       let speedVariance =  Phaser.Math.Between(0, 50);
-      let virus = new Virus (this, this.virusSpeed - speedVariance, 'virus');
-      this.virusGroup.add(virus);
+      this.virus = new Virus (this, this.virusSpeed - speedVariance, 'virus');
+      this.virusGroup.add(this.virus);
       console.log("parts 2 of adding v");
     }
 
     // create new Virus and add them to existing Virus group
     addMask() {
       let speedVariance =  Phaser.Math.Between(0, 50);
-      let mask = new Masks (this, this.maskSpeed - speedVariance, 'mask');
-      this.maskGroup.add(mask);
+      this.mask = new Masks (this, this.maskSpeed - speedVariance, 'mask');
+      this.maskGroup.add(this.mask);
       console.log("parts 2 of adding v");
     }
 
@@ -100,11 +114,13 @@ class Play extends Phaser.Scene {
 
     }
 
-    maskCollision() {
+    maskCollision(characterRef, mask) {
       console.log("hit mask")
 
-      //this.time.delayedCall(300, () => {this.scene.start('GameOver')
-     // })
+      mask.alpha = 0
+      mask.destroy()
+      this.masksScore ++ 
+      this.score.text = `Masks Collected: ${this.masksScore}`
 
     }
     
