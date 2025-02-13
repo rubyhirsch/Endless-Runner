@@ -25,6 +25,18 @@ class Menu extends Phaser.Scene {
             frameHeight: 145 
         })
 
+        // whish sound https://freesound.org/people/moogy73/sounds/425706/
+        this.load.audio('whish', 'assets/whish.wav')
+
+        // sneeze sound https://freesound.org/people/unfa/sounds/181225/
+        this.load.audio('sneeze', 'assets/sneezeOne.wav')
+
+        // scream sound https://freesound.org/people/Kalibrk/sounds/339309/
+        this.load.audio('scream', 'assets/scream.wav')
+
+        // bg 'music' aka blood sounds https://freesound.org/people/Merrick079/sounds/567347/
+        this.load.audio('bgm', 'assets/blood_sound.wav')
+
     }
     create() {
         //create menu screen

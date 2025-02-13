@@ -1,3 +1,9 @@
+// Name: Ruby Hirsch 
+// Game Title: Contagion Crosser 
+// Approx time: 30 hours 
+// Creative Tilt: I made all of the assets, including the sprite animations 
+// I had an extension until Feb 12th
+
 let config = {
     type: Phaser.AUTO,
     width: 1680, 
@@ -5,7 +11,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            //debug: true
         }
     },
     scene: [ Menu, Play, Credits, Tut, GameOver ]

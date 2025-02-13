@@ -44,12 +44,24 @@ class Credits extends Phaser.Scene {
             color: 'black',
             align: 'center',
         }
+
+        let twoLookSmall = {
+            fontFamily: 'Courier',
+            fontSize: '20px',
+            backgroundColor: '#bec6c0',
+            color: 'black',
+            align: 'center',
+        }
         
         // add title text
         this.add.text(centerX + 350, centerY - 300, ' Credits ', oneMenuLook).setOrigin(0.5)
 
         // add descriptor
-        this.add.text(centerX + 360, centerY - 200, ' Programming and Art by Ruby Hirsch', twoLook).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY + 200, ' Programming and Art by Ruby Hirsch', twoLookSmall).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY + 250, ' "Short Sneeze" by unfa ', twoLookSmall).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY + 300, ' "Jirka Scream" by Kalibrk ', twoLookSmall).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY + 350, ' "Underwater Ambience" by Merrick 079 ', twoLookSmall).setOrigin(0.5)
+        this.add.text(centerX + 360, centerY + 400, ' "Whoose Medium Short" by moogy73 ', twoLookSmall).setOrigin(0.5)
 
         // add text for directions
         this.add.text(game.config.width/2 + 350, 350, ' Press [M] for Menu ', oneLook).setOrigin(0.5)

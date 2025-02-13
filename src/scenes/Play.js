@@ -2,8 +2,26 @@ class Play extends Phaser.Scene {
     constructor() {
       super('playScene')
     }
+
+  
     
     create() {
+
+      // play and loop background music
+      this.bgm = this.sound.add('bgm', {
+        volume: 0.5,
+        loop: true
+      })
+
+      if(!this.musicPlayed) {
+        this.bgm.play()
+        this.musicPlayed = true
+      }
+
+      if (this.musicPlayed && this.scene.isActive('playScene')) {
+        this.musicPlayed = false
+      }
+
       this.physics.world.gravity.y = 300
       // place tile sprite
       this.blood = this.add.tileSprite(0, 0, 1680, 900, 'blood').setOrigin(0, 0)
@@ -87,7 +105,7 @@ class Play extends Phaser.Scene {
 
     // create new Virus and add them to existing Virus group
     addMask() {
-      let speedVariance =  Phaser.Math.Between(0, 50);
+      let speedVariance =  Phaser.Math.Between(25, 75);
       this.mask = new Masks (this, this.maskSpeed - speedVariance, 'mask');
       this.maskGroup.add(this.mask);
       console.log("parts 2 of adding v");
@@ -98,7 +116,10 @@ class Play extends Phaser.Scene {
         this.blood.tilePositionX -= -4
 
         if(Phaser.Input.Keyboard.JustDown(this.keySPACE)) {
-          characterRef.body.setVelocityY(-230) 
+          characterRef.body.setVelocityY(-230);
+          this.sound.play('whish', {
+            volume: 0.5
+          })
         }
 
         // check collisions
@@ -109,6 +130,10 @@ class Play extends Phaser.Scene {
     virusCollision() {
       console.log("hit virus")
 
+      this.sound.play('scream', {
+        volume: 0.1
+      })
+
       this.time.delayedCall(300, () => {this.scene.start('GameOver')
       })
 
@@ -117,10 +142,16 @@ class Play extends Phaser.Scene {
     maskCollision(characterRef, mask) {
       console.log("hit mask")
 
+      this.sound.play('sneeze', {
+        volume: 0.5
+      })
+
       mask.alpha = 0
       mask.destroy()
       this.masksScore ++ 
       this.score.text = `Masks Collected: ${this.masksScore}`
+
+     
 
     }
     
