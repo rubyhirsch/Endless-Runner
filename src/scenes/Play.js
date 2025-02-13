@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
       characterRef.setSize(212, 193)
       //characterRef.setOffset(10, 0)
       characterRef.body.setCollideWorldBounds(true)
-      //characterRef.setImmovable()
+      characterRef.setImmovable()
       characterRef.setMaxVelocity(0, 600)
       characterRef.setDragY(8)
       //characterRef.destroyed = false
@@ -60,6 +60,17 @@ class Play extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.keySPACE)) {
           characterRef.body.setVelocityY(-230) 
         }
-        
+
+        // check collisions
+        this.physics.world.collide(characterRef, this.virusGroup, this.virusCollision, null, this)
+      }
+
+      virusCollision() {
+        console.log("hit virus")
+
+        this.time.delayedCall(300, () => {this.scene.start('GameOver')
+        })
+
     }
+    
 }
