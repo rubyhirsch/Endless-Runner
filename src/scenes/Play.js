@@ -10,7 +10,6 @@ class Play extends Phaser.Scene {
       this.add.text(20, 20, "Endless Runner Play")
 
       characterRef = this.physics.add.sprite(0, 0, 'characterSprite').setOrigin(0, 0)
-      characterRef.setSize(212, 193)
       //characterRef.setOffset(10, 0)
       characterRef.body.setCollideWorldBounds(true)
       characterRef.setImmovable()
@@ -24,26 +23,44 @@ class Play extends Phaser.Scene {
         frameRate: 2,
         repeat: -1, 
         frames: this.anims.generateFrameNumbers('characterSprite', {
-            start:0,
+            start: 0,
             end: 2
         })
       })
+
       this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
       characterRef.play('look')
 
 
       this.virus = 0
-      this.virusSpeed = -450;
+      this.virusSpeed = -450
+
+      this.mask = 0
+      this.maskSpeed = -450
+
+      
+
+      // set up mask group 
+      this.maskGroup = this.add.group({
+        runChildUpdate: true    // make sure update runs on group children
+      });
+
+      // wait a few seconds before spawning mask
+      this.time.delayedCall(100, () => { 
+        console.log("add mask")
+        this.addMask(); 
+      });
 
       // set up virus group
       this.virusGroup = this.add.group({
         runChildUpdate: true    // make sure update runs on group children
-    });
-    // wait a few seconds before spawning virus
-    this.time.delayedCall(100, () => { 
+      });
+
+      // wait a few seconds before spawning virus
+      this.time.delayedCall(100, () => { 
         console.log("add virus")
         this.addVirus(); 
-    });
+      });
     }
     
     // create new Virus and add them to existing Virus group
@@ -52,7 +69,16 @@ class Play extends Phaser.Scene {
       let virus = new Virus (this, this.virusSpeed - speedVariance, 'virus');
       this.virusGroup.add(virus);
       console.log("parts 2 of adding v");
-  }
+    }
+
+    // create new Virus and add them to existing Virus group
+    addMask() {
+      let speedVariance =  Phaser.Math.Between(0, 50);
+      let mask = new Masks (this, this.maskSpeed - speedVariance, 'mask');
+      this.maskGroup.add(mask);
+      console.log("parts 2 of adding v");
+    }
+
 
     update() {
         this.blood.tilePositionX -= -4
@@ -63,13 +89,22 @@ class Play extends Phaser.Scene {
 
         // check collisions
         this.physics.world.collide(characterRef, this.virusGroup, this.virusCollision, null, this)
-      }
+        this.physics.world.collide(characterRef, this.maskGroup, this.maskCollision, null, this)
+    }
 
-      virusCollision() {
-        console.log("hit virus")
+    virusCollision() {
+      console.log("hit virus")
 
-        this.time.delayedCall(300, () => {this.scene.start('GameOver')
-        })
+      this.time.delayedCall(300, () => {this.scene.start('GameOver')
+      })
+
+    }
+
+    maskCollision() {
+      console.log("hit mask")
+
+      //this.time.delayedCall(300, () => {this.scene.start('GameOver')
+     // })
 
     }
     

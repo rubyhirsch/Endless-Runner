@@ -21,8 +21,8 @@ class Menu extends Phaser.Scene {
 
         //loading animated spritesheet for character
         this.load.spritesheet('characterSprite', './assets/character_sprite_sheet.png', {
-            frameWidth: 212,
-            frameHeight: 193 
+            frameWidth: 159,
+            frameHeight: 145 
         })
 
     }
