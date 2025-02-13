@@ -1,21 +1,28 @@
-// Virus prefab
-class Virus extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame) {
-      super(scene, x, y, texture, frame)
-      scene.add.existing(this) // add to existing scene 
-      this.moveSpeed = 3 // spaceship speed in pixels/frame
-  
-      // add object to existing scene
-      scene.add.existing(this)
+class Virus extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, velocity, sprite) {
+        // call Phaser Physics Sprite constructor
+        super(scene, w + 100, Phaser.Math.Between(100, 600), 'virus'); 
+        
+        this.parentScene = scene;               
+
+        // set up physics sprite
+        this.parentScene.add.existing(this);    
+        this.parentScene.physics.add.existing(this);    
+        this.setVelocityX(velocity);            
+        this.setImmovable();                    
+        this.newVirus = true;                 
+        this.body.setAllowGravity(false);
     }
 
     update() {
-        // move spaceship left 
-        this.x -= this.moveSpeed
+        // add new Virus when existing Virus hits center X
+        if(this.newVirus && this.x < centerX) {
+            this.parentScene.addVirus(this.parent, this.velocity);
+            this.newVirus = false;
+        }
 
-        // wrap from left to right edge 
-        if(this.x <= 0 - this.width) {
-            this.x = game.config.width
+        if(this.x < -this.width) {
+            this.destroy();
         }
     }
-  }
+}

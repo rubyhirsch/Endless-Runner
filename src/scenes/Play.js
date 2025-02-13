@@ -30,8 +30,29 @@ class Play extends Phaser.Scene {
       })
       this.keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
       characterRef.play('look')
+
+
+      this.virus = 0
+      this.virusSpeed = -450;
+
+      // set up virus group
+      this.virusGroup = this.add.group({
+        runChildUpdate: true    // make sure update runs on group children
+    });
+    // wait a few seconds before spawning virus
+    this.time.delayedCall(100, () => { 
+        console.log("add virus")
+        this.addVirus(); 
+    });
     }
     
+    // create new Virus and add them to existing Virus group
+    addVirus() {
+      let speedVariance =  Phaser.Math.Between(0, 50);
+      let virus = new Virus (this, this.virusSpeed - speedVariance, 'virus');
+      this.virusGroup.add(virus);
+      console.log("parts 2 of adding v");
+  }
 
     update() {
         this.blood.tilePositionX -= -4
